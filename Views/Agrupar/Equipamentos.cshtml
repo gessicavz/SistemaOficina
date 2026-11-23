@@ -1,0 +1,6 @@
+@model IEnumerable<SistemaOficina.Models.EquipamentoAgrupadoVM>
+@{ ViewData["Title"] = (string)ViewBag.Titulo; }
+<div class="page-heading"><div><h1>@ViewBag.Titulo</h1><p>Quantidade, equipamentos em manutenção e valor total.</p></div><button onclick="window.print()" class="btn btn-primary">Imprimir</button></div>
+<div class="table-responsive"><table class="table"><thead><tr><th>@ViewBag.ColunaGrupo</th><th class="text-end">Quantidade</th><th class="text-end">Em manutenção</th><th class="text-end">Valor total</th></tr></thead><tbody>
+@foreach (var i in Model) { <tr><td>@i.Grupo</td><td class="text-end">@i.Quantidade</td><td class="text-end">@i.EmManutencao</td><td class="text-end">@i.Total.ToString("C")</td></tr> }
+</tbody><tfoot><tr><td>Total geral</td><td class="text-end">@Model.Sum(x => x.Quantidade)</td><td class="text-end">@Model.Sum(x => x.EmManutencao)</td><td class="text-end">@Model.Sum(x => x.Total).ToString("C")</td></tr></tfoot></table></div>

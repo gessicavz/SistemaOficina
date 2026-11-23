@@ -1,0 +1,7 @@
+@model IEnumerable<SistemaOficina.Models.PivotLinhaVM>
+@{ ViewData["Title"] = "Pivot de pagamentos"; var linhas = Model.ToList(); }
+<div class="page-heading"><div><h1>Pagamentos por funcionário e mês — @ViewBag.Ano</h1><p>Funcionários nas linhas, meses nas colunas.</p></div><button onclick="window.print()" class="btn btn-primary">Imprimir</button></div>
+<form method="get" class="content-card filter-form"><div class="row g-3"><div class="col-md-3"><label>Ano de referência</label><select name="ano" asp-items="ViewBag.Anos" class="form-select"></select></div><div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary w-100">Atualizar</button></div></div></form>
+<div class="table-responsive"><table class="table table-sm align-middle"><thead><tr><th>Funcionário</th>@for (int m = 0; m < 12; m++) { <th class="text-end">@Meses.Nomes[m].Substring(0, 3)</th> }<th class="text-end">Total</th></tr></thead><tbody>
+@foreach (var l in linhas) { <tr><td class="text-nowrap">@l.Funcionario</td>@for (int m = 0; m < 12; m++) { <td class="text-end text-nowrap">@l.Meses[m].ToString("N2")</td> }<td class="text-end text-nowrap fw-bold">@l.Total.ToString("N2")</td></tr> }
+</tbody><tfoot><tr><td>Total</td>@for (int m = 0; m < 12; m++) { <td class="text-end text-nowrap">@linhas.Sum(l => l.Meses[m]).ToString("N2")</td> }<td class="text-end text-nowrap">@linhas.Sum(l => l.Total).ToString("N2")</td></tr></tfoot></table></div>

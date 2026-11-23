@@ -1,0 +1,3 @@
+@model SistemaOficina.Models.Equipamento
+@{ ViewData["Title"] = "Excluir equipamento"; }
+<div class="content-card form-card"><h1>Excluir equipamento</h1><div class="alert alert-warning">Tem certeza de que deseja excluir <strong>@Model.Nome</strong> (série @Model.NumeroSerie)?</div><form asp-action="Delete"><input type="hidden" asp-for="Id"/><button class="btn btn-danger">Excluir</button> <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a></form></div>

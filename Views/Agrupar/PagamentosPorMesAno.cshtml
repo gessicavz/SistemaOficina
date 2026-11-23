@@ -1,0 +1,6 @@
+@model IEnumerable<SistemaOficina.Models.PagamentoPorMesAnoVM>
+@{ ViewData["Title"] = "Pagamentos por mês/ano"; }
+<div class="page-heading"><div><h1>Pagamentos por mês e ano</h1><p>Agrupados pela competência.</p></div><button onclick="window.print()" class="btn btn-primary">Imprimir</button></div>
+<div class="table-responsive"><table class="table"><thead><tr><th>Ano</th><th>Mês</th><th class="text-end">Soma</th><th class="text-end">Quantidade</th><th class="text-end">Média</th></tr></thead><tbody>
+@foreach (var i in Model) { <tr><td>@i.Ano</td><td>@(i.Mes is >= 1 and <= 12 ? Meses.Nomes[i.Mes - 1] : "—")</td><td class="text-end">@i.Total.ToString("C")</td><td class="text-end">@i.Quantidade</td><td class="text-end">@i.Media.ToString("C")</td></tr> }
+</tbody><tfoot><tr><td colspan="2">Total geral</td><td class="text-end">@Model.Sum(x => x.Total).ToString("C")</td><td class="text-end">@Model.Sum(x => x.Quantidade)</td><td></td></tr></tfoot></table></div>

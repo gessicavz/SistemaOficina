@@ -1,0 +1,196 @@
+:root {
+    --vinho-escuro: #4A1520;
+    --vinho: #641E2C;
+    --vinho-claro: #7B293A;
+    --bege: #F4EDE2;
+    --bege-escuro: #E7D8C3;
+    --dourado: #B89155;
+    --texto: #342B2D;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    min-height: 100vh;
+    margin-bottom: 80px;
+    color: var(--texto);
+    background-color: #FCFAF6;
+}
+
+/* Menu superior */
+.navbar {
+    background-color: var(--vinho) !important;
+    border-bottom: 3px solid var(--dourado);
+    box-shadow: 0 4px 14px rgba(74, 21, 32, 0.2);
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+}
+
+.navbar .nav-link {
+    color: white !important;
+    border-radius: 6px;
+}
+
+.navbar .nav-link:hover {
+    color: var(--vinho-escuro) !important;
+    background-color: var(--bege-escuro);
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4 {
+    color: var(--vinho-escuro);
+}
+
+/* Links */
+a {
+    color: var(--vinho);
+}
+
+a:hover {
+    color: var(--vinho-escuro);
+}
+
+/* Botões */
+.btn-primary {
+    color: white;
+    background-color: var(--vinho);
+    border-color: var(--vinho);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: white;
+    background-color: var(--vinho-escuro);
+    border-color: var(--vinho-escuro);
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    border-color: var(--vinho-claro);
+    box-shadow: 0 0 0 0.25rem rgba(123, 41, 58, 0.2);
+}
+
+/* Campos dos formulários */
+.form-control,
+.form-select {
+    border: 1px solid var(--bege-escuro);
+    border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--vinho-claro);
+}
+
+/* Tabelas */
+.table {
+    background-color: white;
+    border: 1px solid var(--bege-escuro);
+    box-shadow: 0 5px 15px rgba(74, 21, 32, 0.08);
+}
+
+.table thead {
+    color: white;
+    background-color: var(--vinho);
+}
+
+.table tbody tr:hover {
+    background-color: var(--bege);
+}
+
+/* Rodapé */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    color: white !important;
+    background-color: var(--vinho-escuro);
+    border-top: 3px solid var(--dourado);
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+.btn-outline-secondary {
+    color: #641E2C;
+    border-color: #641E2C;
+}
+
+.btn-outline-secondary:hover {
+    color: #ffffff;
+    background-color: #641E2C;
+    border-color: #641E2C;
+}
+
+.page-heading { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.page-heading p { color:#766a6d; margin:0; }
+.content-card, .metric-card { background:#fff; border:1px solid var(--bege-escuro); border-radius:14px; padding:1.4rem; box-shadow:0 6px 20px rgba(74,21,32,.07); }
+.metric-card { min-height:120px; border-top:4px solid var(--vinho); }
+.metric-card span { display:block; color:#74676a; font-size:.88rem; }
+.metric-card strong { display:block; margin-top:.65rem; color:var(--vinho-escuro); font-size:1.45rem; }
+.metric-card.paid { border-top-color:#2d7b54; }
+.metric-card.pending { border-top-color:#c58b27; }
+.metric-card.overdue { border-top-color:#b63b3b; }
+.form-card { max-width:900px; margin:auto; }
+.form-card h1 { margin-bottom:1.5rem; }
+.form-actions { display:flex; gap:.65rem; margin-top:1.5rem; }
+.filter-bar { display:flex; gap:.65rem; max-width:650px; margin-bottom:1rem; }
+.filter-tabs { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.filter-tabs a { background:var(--bege); border-radius:999px; padding:.45rem .9rem; text-decoration:none; }
+.actions { display:flex; gap:.7rem; align-items:center; flex-wrap:wrap; }
+.actions a, .link-button { white-space:nowrap; }
+.actions form { display:inline; }
+.link-button { border:0; padding:0; background:none; color:#2d7b54; text-decoration:underline; }
+.status { display:inline-block; padding:.3rem .65rem; border-radius:999px; font-size:.82rem; font-weight:600; }
+.status.pago { color:#17603c; background:#dff3e8; }
+.status.pendente { color:#805b13; background:#fff0c9; }
+.status.atrasado { color:#8b2424; background:#f8dada; }
+.details dt, .details dd { padding-top:.55rem; padding-bottom:.55rem; border-bottom:1px solid var(--bege); }
+.filter-form { margin-bottom:1rem; }
+.report-summary { text-align:right; margin:1rem 0; font-size:1.1rem; }
+
+@media print {
+    header, footer, .page-heading .btn, .filter-form { display:none !important; }
+    body { background:white; margin:0; }
+    .container { max-width:none; }
+}
+
+/* Acréscimos da oficina */
+.navbar .dropdown-menu { border-radius: 10px; border: 1px solid var(--bege-escuro); }
+.navbar .dropdown-item { color: var(--vinho-escuro) !important; }
+.navbar .dropdown-item:hover { background-color: var(--bege); }
+.navbar .dropdown-header { color: var(--vinho); font-weight: 600; }
+.navbar-user { color: #fff; font-size: .9rem; }
+.table tfoot { background-color: var(--bege); font-weight: 600; }
+
+.status.operando { color:#17603c; background:#dff3e8; }
+.status.manutencao { color:#805b13; background:#fff0c9; }
+.status.parado { color:#8b2424; background:#f8dada; }

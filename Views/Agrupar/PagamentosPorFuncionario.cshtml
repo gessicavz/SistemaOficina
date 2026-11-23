@@ -1,0 +1,6 @@
+@model IEnumerable<SistemaOficina.Models.PagamentoPorFuncionarioVM>
+@{ ViewData["Title"] = "Pagamentos por funcionário"; }
+<div class="page-heading"><div><h1>Pagamentos por funcionário</h1><p>Soma, quantidade, média, maior e menor pagamento.</p></div><button onclick="window.print()" class="btn btn-primary">Imprimir</button></div>
+<div class="table-responsive"><table class="table"><thead><tr><th>Funcionário</th><th class="text-end">Soma</th><th class="text-end">Quantidade</th><th class="text-end">Média</th><th class="text-end">Maior</th><th class="text-end">Menor</th></tr></thead><tbody>
+@foreach (var i in Model) { <tr><td>@i.Funcionario</td><td class="text-end">@i.Total.ToString("C")</td><td class="text-end">@i.Quantidade</td><td class="text-end">@i.Media.ToString("C")</td><td class="text-end">@i.Maior.ToString("C")</td><td class="text-end">@i.Menor.ToString("C")</td></tr> }
+</tbody><tfoot><tr><td>Total geral</td><td class="text-end">@Model.Sum(x => x.Total).ToString("C")</td><td class="text-end">@Model.Sum(x => x.Quantidade)</td><td colspan="3"></td></tr></tfoot></table></div>

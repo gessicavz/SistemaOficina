@@ -1,0 +1,4 @@
+@model SistemaOficina.Models.Equipamento
+@{ ViewData["Title"] = "Cadastrar equipamento"; }
+<div class="content-card form-card"><h1>Cadastrar equipamento</h1><form asp-action="Create"><partial name="_Form"/><div class="form-actions"><button class="btn btn-primary">Salvar</button><a class="btn btn-outline-secondary" asp-action="Index">Voltar</a></div></form></div>
+@section Scripts { <partial name="_ValidationScriptsPartial"/> }

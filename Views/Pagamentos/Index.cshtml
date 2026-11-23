@@ -1,0 +1,16 @@
+@model IEnumerable<SistemaOficina.Models.Pagamento>
+@{ ViewData["Title"] = "Pagamentos"; string situacao = ViewBag.Situacao; int? mes = ViewBag.Mes; }
+<div class="page-heading"><div><h1>Pagamentos</h1><p>Controle de valores, datas e situações.</p></div><a class="btn btn-primary" asp-action="Create">Cadastrar pagamento</a></div>
+<div class="filter-tabs"><a asp-action="Index">Todos</a><a asp-action="Index" asp-route-situacao="Pendente">Pendentes</a><a asp-action="Index" asp-route-situacao="Pago">Pagos</a><a asp-action="Index" asp-route-situacao="Atrasado">Atrasados</a></div>
+<form method="get" class="content-card filter-form"><div class="row g-3">
+<div class="col-md-4"><label>Funcionário</label><select name="funcionarioId" asp-items="ViewBag.Funcionarios" class="form-select"><option value="">Todos</option></select></div>
+<div class="col-md-2"><label>Mês</label><select name="mes" class="form-select"><option value="">Todos</option>@for (int m = 1; m <= 12; m++) { <option value="@m" selected="@(mes == m)">@Meses.Nomes[m - 1]</option> }</select></div>
+<div class="col-md-2"><label>Ano</label><input name="ano" class="form-control" value="@ViewBag.Ano"/></div>
+<div class="col-md-2"><label>Situação</label><select name="situacao" class="form-select"><option value="">Todas</option><option selected="@(situacao == "Pendente")">Pendente</option><option selected="@(situacao == "Pago")">Pago</option><option selected="@(situacao == "Atrasado")">Atrasado</option></select></div>
+<div class="col-md-2"></div>
+<div class="col-md-3"><label>Vencimento de</label><input type="date" name="inicio" class="form-control" value="@ViewBag.Inicio"/></div>
+<div class="col-md-3"><label>até</label><input type="date" name="fim" class="form-control" value="@ViewBag.Fim"/></div>
+<div class="col-md-3 d-flex align-items-end gap-2"><button class="btn btn-primary">Filtrar</button><a class="btn btn-outline-secondary" asp-action="Index">Limpar</a></div></div></form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Funcionário</th><th>Competência</th><th>Vencimento</th><th>Valor</th><th>Situação</th><th>Ações</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Funcionario?.Nome</td><td>@item.Competencia</td><td>@item.DataVencimento.ToString("dd/MM/yyyy")</td><td>@item.Valor.ToString("C")</td><td><span class="status @item.Situacao.ToString().ToLower()">@item.Situacao</span></td><td class="actions"><a asp-action="Edit" asp-route-id="@item.Id">Editar</a><a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>@if(item.Situacao != SistemaOficina.Models.SituacaoPagamento.Pago){<form asp-action="MarcarPago" asp-route-id="@item.Id" method="post"><button class="link-button">Marcar pago</button></form>}@if (User.IsInRole("Administrador")) { <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a> }</td></tr> }
+</tbody><tfoot><tr><td colspan="3">@Model.Count() registro(s)</td><td colspan="3">Total: @Model.Sum(p => p.Valor).ToString("C")</td></tr></tfoot></table></div>

@@ -1,0 +1,17 @@
+OFICINACONTROL
+
+Sistema de gerenciamento de oficina de manutenção industrial em ASP.NET Core MVC (.NET 10),
+Entity Framework Core, SQL Server, Identity (somente administrador) e Bootstrap. 
+
+1. Abra o projeto no Visual Studio ou VS Code.
+2. Confira a conexão DefaultConnection em appsettings.json.
+3. No terminal, dentro da pasta do projeto, crie a migration inicial:
+   dotnet ef migrations add Inicial --context AppDbContext
+4. Execute o sistema (ele aplica a migration e cria os usuários iniciais):
+   dotnet run
+   (ou, se preferir, rode antes: dotnet ef database update --context AppDbContext)
+5. Abra no navegador a URL mostrada no terminal.
+
+USUÁRIO
+- Administrador: admin@oficina.com / Admin@123
+

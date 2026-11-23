@@ -1,0 +1,10 @@
+@model SistemaOficina.Models.Pagamento
+<div asp-validation-summary="ModelOnly" class="text-danger"></div><div class="row g-3">
+ <div class="col-md-6"><label asp-for="FuncionarioId" class="form-label"></label><select asp-for="FuncionarioId" asp-items="ViewBag.FuncionarioId" class="form-select"><option value="">Selecione</option></select><span asp-validation-for="FuncionarioId" class="text-danger"></span></div>
+ <div class="col-md-3"><label asp-for="Competencia" class="form-label"></label><input asp-for="Competencia" class="form-control" placeholder="09/2026"/><span asp-validation-for="Competencia" class="text-danger"></span></div>
+ <div class="col-md-3"><label asp-for="Valor" class="form-label"></label><input asp-for="Valor" class="form-control"/><span asp-validation-for="Valor" class="text-danger"></span></div>
+ <div class="col-md-4"><label asp-for="DataVencimento" class="form-label"></label><input asp-for="DataVencimento" class="form-control"/><span asp-validation-for="DataVencimento" class="text-danger"></span></div>
+ <div class="col-md-4"><label asp-for="DataPagamento" class="form-label"></label><input asp-for="DataPagamento" class="form-control"/></div>
+ <div class="col-md-4"><label asp-for="FormaPagamento" class="form-label"></label><select asp-for="FormaPagamento" class="form-select"><option value="">Selecione</option><option>Pix</option><option>Transferência</option><option>Dinheiro</option><option>Outro</option></select></div>
+ <div class="col-12"><label asp-for="Observacoes" class="form-label"></label><textarea asp-for="Observacoes" class="form-control" rows="3"></textarea><span asp-validation-for="Observacoes" class="text-danger"></span></div>
+</div>

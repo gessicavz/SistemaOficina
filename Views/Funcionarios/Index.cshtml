@@ -1,0 +1,11 @@
+@model IEnumerable<SistemaOficina.Models.Funcionario>
+@{ ViewData["Title"] = "Funcionários"; string situacao = ViewBag.Situacao; }
+<div class="page-heading"><div><h1>Funcionários</h1><p>Cadastro e consulta da equipe.</p></div><a class="btn btn-primary" asp-action="Create">Cadastrar funcionário</a></div>
+<form method="get" class="content-card filter-form"><div class="row g-3">
+<div class="col-md-4"><label>Nome ou CPF</label><input name="busca" class="form-control" value="@ViewBag.Busca"/></div>
+<div class="col-md-3"><label>Cargo</label><input name="cargo" class="form-control" value="@ViewBag.Cargo"/></div>
+<div class="col-md-3"><label>Situação</label><select name="situacao" class="form-select"><option value="">Todas</option><option selected="@(situacao == "Ativo")">Ativo</option><option selected="@(situacao == "Inativo")">Inativo</option></select></div>
+<div class="col-md-2 d-flex align-items-end gap-2"><button class="btn btn-primary w-100">Buscar</button></div></div></form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Nome</th><th>CPF</th><th>Cargo</th><th>Admissão</th><th>Salário</th><th>Situação</th><th>Ações</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Nome</td><td>@item.CPF</td><td>@item.Cargo</td><td>@item.DataAdmissao.ToString("dd/MM/yyyy")</td><td>@item.Salario.ToString("C")</td><td><span class="badge @(item.Ativo ? "bg-success" : "bg-secondary")">@(item.Ativo ? "Ativo" : "Inativo")</span></td><td class="actions"><a asp-action="Edit" asp-route-id="@item.Id">Editar</a><a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>@if (User.IsInRole("Administrador")) { <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a> }</td></tr> }
+</tbody></table></div>

@@ -1,0 +1,67 @@
+﻿a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: normal;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+a {
+    color: #641E2C;
+}
+
+a:hover {
+    color: #4A1520;
+}
+
+/* Botões principais */
+.btn-primary {
+    color: #ffffff;
+    background-color: #641E2C;
+    border-color: #641E2C;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: #ffffff;
+    background-color: #4A1520;
+    border-color: #4A1520;
+}
+
+/* Menu ativo */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #ffffff;
+    background-color: #641E2C;
+    border-color: #641E2C;
+}
+
+/* Bordas */
+.border-top {
+    border-top: 2px solid #B89155 !important;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #B89155 !important;
+}
+
+/* Sombra do menu */
+.box-shadow {
+    box-shadow: 0 0.25rem 0.75rem rgba(74, 21, 32, 0.15);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Rodapé */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    color: #ffffff;
+    background-color: #4A1520;
+}

@@ -1,0 +1,13 @@
+@model IEnumerable<SistemaOficina.Models.Equipamento>
+@{ ViewData["Title"] = "Equipamentos"; string situacao = ViewBag.Situacao; }
+<div class="page-heading"><div><h1>Equipamentos</h1><p>Máquinas e ativos das indústrias atendidas pela manutenção.</p></div>@if (User.IsInRole("Administrador")) { <a class="btn btn-primary" asp-action="Create">Cadastrar equipamento</a> }</div>
+<form method="get" class="content-card filter-form"><div class="row g-3">
+<div class="col-md-3"><label>Nome ou nº de série</label><input name="busca" class="form-control" value="@ViewBag.Busca"/></div>
+<div class="col-md-3"><label>Tipo</label><select name="tipo" asp-items="ViewBag.Tipos" class="form-select"><option value="">Todos</option></select></div>
+<div class="col-md-3"><label>Localização</label><input name="localizacao" class="form-control" value="@ViewBag.Localizacao"/></div>
+<div class="col-md-3"><label>Técnico responsável</label><select name="funcionarioId" asp-items="ViewBag.Funcionarios" class="form-select"><option value="">Todos</option></select></div>
+<div class="col-md-3"><label>Situação</label><select name="situacao" class="form-select"><option value="">Todas</option><option value="Operando" selected="@(situacao == "Operando")">Operando</option><option value="Manutencao" selected="@(situacao == "Manutencao")">Em manutenção</option><option value="Parado" selected="@(situacao == "Parado")">Parado</option></select></div>
+<div class="col-md-3 d-flex align-items-end gap-2"><button class="btn btn-primary">Filtrar</button><a class="btn btn-outline-secondary" asp-action="Index">Limpar</a></div></div></form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Equipamento</th><th>Tipo</th><th>Nº de série</th><th>Localização</th><th>Responsável</th><th>Valor</th><th>Situação</th><th>Ações</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Nome</td><td>@item.Tipo</td><td>@item.NumeroSerie</td><td>@item.Localizacao</td><td>@item.Funcionario?.Nome</td><td>@item.ValorAquisicao.ToString("C")</td><td><span class="status @item.Situacao.ToString().ToLower()">@item.Situacao.Texto()</span></td><td class="actions">@if (User.IsInRole("Administrador")) { <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> }<a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>@if (User.IsInRole("Administrador")) { <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a> }</td></tr> }
+</tbody><tfoot><tr><td colspan="4">@Model.Count() registro(s)</td><td colspan="4">Valor total: @Model.Sum(e => e.ValorAquisicao).ToString("C")</td></tr></tfoot></table></div>

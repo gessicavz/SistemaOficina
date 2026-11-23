@@ -1,0 +1,32 @@
+@model SistemaOficina.Models.DashboardViewModel
+@{ ViewData["Title"] = "Dashboard"; bool admin = User.IsInRole("Administrador"); }
+<div class="page-heading"><div><h1>Dashboard</h1><p>Visão geral da oficina de manutenção industrial.</p></div></div>
+@if (admin)
+{
+<div class="row g-3 mb-4">
+    <div class="col-md"><div class="metric-card"><span>Funcionários ativos</span><strong>@Model.FuncionariosAtivos</strong></div></div>
+    <div class="col-md"><div class="metric-card"><span>Total previsto</span><strong>@Model.TotalPrevisto.ToString("C")</strong></div></div>
+    <div class="col-md"><div class="metric-card paid"><span>Total pago</span><strong>@Model.TotalPago.ToString("C")</strong></div></div>
+    <div class="col-md"><div class="metric-card pending"><span>Pendente</span><strong>@Model.TotalPendente.ToString("C")</strong></div></div>
+    <div class="col-md"><div class="metric-card overdue"><span>Atrasado</span><strong>@Model.TotalAtrasado.ToString("C")</strong></div></div>
+</div>
+<p class="text-muted">Pagamentos em aberto (pendentes e atrasados): <strong>@Model.PagamentosEmAberto</strong></p>
+}
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="metric-card"><span>Equipamentos cadastrados</span><strong>@Model.Equipamentos</strong></div></div>
+    <div class="col-md-3"><div class="metric-card pending"><span>Equipamentos em manutenção</span><strong>@Model.EquipamentosEmManutencao</strong></div></div>
+</div>
+@if (admin)
+{
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Próximos vencimentos</h2><a class="btn btn-primary" asp-controller="Pagamentos" asp-action="Create">Novo pagamento</a></div>
+    @if (Model.ProximosVencimentos.Count == 0) { <p class="text-muted">Nenhum vencimento próximo.</p> }
+    else { <div class="table-responsive"><table class="table"><thead><tr><th>Funcionário</th><th>Competência</th><th>Vencimento</th><th>Valor</th></tr></thead><tbody>
+    @foreach (var p in Model.ProximosVencimentos) { <tr><td>@p.Funcionario?.Nome</td><td>@p.Competencia</td><td>@p.DataVencimento.ToString("dd/MM/yyyy")</td><td>@p.Valor.ToString("C")</td></tr> }
+    </tbody></table></div> }
+</div>
+}
+else
+{
+<div class="content-card"><p class="mb-2">Use o menu <strong>Equipamentos</strong> para consultar os equipamentos e seus responsáveis.</p><a class="btn btn-primary" asp-controller="Equipamentos" asp-action="Index">Ver equipamentos</a></div>
+}

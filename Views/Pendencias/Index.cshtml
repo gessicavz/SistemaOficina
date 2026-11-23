@@ -1,0 +1,6 @@
+@model IEnumerable<SistemaOficina.Models.Pagamento>
+@{ ViewData["Title"] = "Pendências"; }
+<div class="page-heading"><div><h1>Pendências</h1><p>Pagamentos pendentes e atrasados.</p></div></div>
+<div class="table-responsive"><table class="table"><thead><tr><th>Funcionário</th><th>Vencimento</th><th>Dias em atraso</th><th>Valor</th><th>Situação</th><th></th></tr></thead><tbody>
+@foreach(var item in Model){<tr><td>@item.Funcionario?.Nome</td><td>@item.DataVencimento.ToString("dd/MM/yyyy")</td><td>@(item.DiasAtraso == 0 ? "—" : item.DiasAtraso)</td><td>@item.Valor.ToString("C")</td><td><span class="status @item.Situacao.ToString().ToLower()">@item.Situacao</span></td><td><form asp-controller="Pagamentos" asp-action="MarcarPago" asp-route-id="@item.Id" method="post"><button class="btn btn-sm btn-success">Marcar como pago</button></form></td></tr>}
+</tbody></table></div>

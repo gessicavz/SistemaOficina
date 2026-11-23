@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OficinaControl</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header><nav class="navbar navbar-expand-lg navbar-dark mb-4"><div class="container">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">OficinaControl</a>
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="menu"><ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Equipamentos" asp-action="Index">Equipamentos</a></li>
+            @if (User.IsInRole("Administrador"))
+            {
+            <li class="nav-item"><a class="nav-link" asp-controller="Funcionarios" asp-action="Index">Funcionários</a></li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Pagamentos" asp-action="Index">Pagamentos</a></li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Pendencias" asp-action="Index">Pendências</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Relatórios</a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" asp-controller="Relatorios" asp-action="Index">Pagamentos (filtros e impressão)</a></li>
+                    <li><h6 class="dropdown-header">Agrupamentos</h6></li>
+                    <li><a class="dropdown-item" asp-controller="Agrupar" asp-action="PagamentosPorFuncionario">Pagamentos por funcionário</a></li>
+                    <li><a class="dropdown-item" asp-controller="Agrupar" asp-action="PagamentosPorMesAno">Pagamentos por mês/ano</a></li>
+                    <li><a class="dropdown-item" asp-controller="Agrupar" asp-action="EquipamentosPorFuncionario">Equipamentos por técnico</a></li>
+                    <li><a class="dropdown-item" asp-controller="Agrupar" asp-action="EquipamentosPorTipo">Equipamentos por tipo</a></li>
+                    <li><a class="dropdown-item" asp-controller="Pivot" asp-action="Index">Pivot de pagamentos</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Movimentacao" asp-action="Index">Movimentações</a></li>
+            }
+            <li class="nav-item ms-lg-3">
+                <form asp-controller="Account" asp-action="Logout" method="post" class="d-flex align-items-center gap-2">
+                    <span class="navbar-user">@User.Identity.Name</span>
+                    <button type="submit" class="btn btn-sm btn-outline-light">Sair</button>
+                </form>
+            </li>
+        </ul></div>
+        }
+    </div></nav></header>
+    <main class="container pb-5">
+        @if (TempData["Sucesso"] != null) { <div class="alert alert-success">@TempData["Sucesso"]</div> }
+        @if (TempData["Erro"] != null) { <div class="alert alert-danger">@TempData["Erro"]</div> }
+        @RenderBody()
+    </main>
+    <footer class="footer"><div class="container">&copy; 2026 - OficinaControl</div></footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

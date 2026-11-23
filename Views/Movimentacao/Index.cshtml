@@ -1,0 +1,7 @@
+@model IEnumerable<SistemaOficina.Models.Movimentacao>
+@{ ViewData["Title"] = "Movimentações"; string tipo = ViewBag.Tipo; }
+<div class="page-heading"><div><h1>Movimentações</h1><p>Histórico das operações realizadas no sistema (500 mais recentes).</p></div></div>
+<form method="get" class="filter-bar"><select name="tipo" class="form-select"><option value="">Todos os tipos</option><option selected="@(tipo == "Cadastro")">Cadastro</option><option selected="@(tipo == "Atualização")">Atualização</option><option selected="@(tipo == "Exclusão")">Exclusão</option></select><button class="btn btn-outline-secondary">Filtrar</button></form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Usuário</th></tr></thead><tbody>
+@foreach (var m in Model) { <tr><td class="text-nowrap">@m.DataMovimentacao.ToString("dd/MM/yyyy HH:mm")</td><td>@m.Tipo</td><td>@m.Descricao</td><td>@m.Usuario</td></tr> }
+</tbody></table></div>
